@@ -60,9 +60,17 @@ def index():
 
 @app.route('/recuperar', methods=['POST'])
 def recuperar():
-    email = request.form['email']
+    data = request.form
+    email = data.get('email')
+    print(email)
     send_verification_code(email)
     return 'E-mail enviado! Verifique sua caixa de entrada.'
 
+@app.route('/verificar', methods=['POST'])
+def verificar():
+    data = request.form
+    code = data.get('code')
+    print(code)
+    return 'Código verificado com sucesso!'
 if __name__ == '__main__':
     app.run(debug=True)
